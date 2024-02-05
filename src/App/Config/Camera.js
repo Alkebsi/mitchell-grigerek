@@ -27,7 +27,7 @@ export default class Camera extends THREE.EventDispatcher {
       100,
     );
 
-    this.instance.position.set(4, 4, 4);
+    this.instance.position.set(5, 4, 5);
     this.instanceGroup.add(this.instance);
     this.instanceGroup.position.set(0, 0, 0);
     this.scene.add(this.instanceGroup);
@@ -35,11 +35,20 @@ export default class Camera extends THREE.EventDispatcher {
 
   setOrbitControls() {
     this.controls = new OrbitControls(this.instance, this.canvas);
+    this.controls.autoRotate = true;
+    this.controls.autoRotateSpeed = 4;
+    this.controls.maxPolarAngle = Math.PI * 0.49;
+    this.controls.minPolarAngle = Math.PI * 0.1;
+    this.controls.minDistance = 3;
+    this.controls.maxDistance = 10;
     this.controls.enableDamping = true;
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  setTests() {}
+  setTests() {
+    this.controls.autoRotate = false;
+    this.controls.maxPolarAngle = Math.PI;
+    this.controls.minPolarAngle = 0;
+  }
 
   resize() {
     this.instance.aspect = this.sizes.width / this.sizes.height;
