@@ -10,7 +10,7 @@ export default class World {
     this.tests = this.app.tests;
 
     this.city = new City();
-    this.room = new Room();
+    // this.room = new Room();
 
     if (this.tests.active) {
       this.setTests();

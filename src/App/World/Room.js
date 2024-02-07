@@ -44,7 +44,7 @@ export default class Room {
 
   setFloor() {
     this.floor = new THREE.Mesh(
-      new THREE.PlaneGeometry(64, 64),
+      new THREE.BoxGeometry(64, 1, 64),
       new THREE.MeshStandardMaterial({
         color: 0x444444,
         roughness: 0.3,
@@ -52,7 +52,7 @@ export default class Room {
       }),
     );
 
-    this.floor.rotation.x = -Math.PI * 0.5;
+    this.floor.position.set(0, -0.5, 0);
 
     this.scene.add(this.floor);
   }
