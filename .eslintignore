@@ -1,3 +1,6 @@
 /dist/*
 /node_modules/*
 /resources/*
+/src/App/Utils/Tests.js
+/src/App/Config/CustomOutlinePass.js
+/src/App/Config/FindSurfaces.js

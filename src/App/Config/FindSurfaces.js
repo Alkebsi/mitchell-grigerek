@@ -1,10 +1,10 @@
-import * as THREE from "three";
+import * as THREE from 'three';
 
 /*
   This class computes "surface IDs" for a given mesh.
 
   A "surface" is defined as a set of triangles that share vertices.
-  
+
   Inspired by Ian MacLarty, see:
     https://twitter.com/ianmaclarty/status/1499494878908403712
 */
@@ -26,7 +26,7 @@ class FindSurfaces {
     const colors = [];
     for (let i = 0; i < numVertices; i++) {
       const vertexId = i;
-      let surfaceId = vertexIdToSurfaceId[vertexId];
+      const surfaceId = vertexIdToSurfaceId[vertexId];
 
       colors.push(surfaceId, 0, 0, 1);
     }
@@ -76,7 +76,7 @@ class FindSurfaces {
       // Get all neighbors recursively
       const surfaceVertices = getNeighborsNonRecursive(node);
       // Mark them as explored
-      for (let v of surfaceVertices) {
+      for (const v of surfaceVertices) {
         exploredNodes[v] = true;
         vertexIdToSurfaceId[v] = this.surfaceId;
       }
@@ -88,7 +88,7 @@ class FindSurfaces {
       let result = [node];
       explored[node] = true;
 
-      for (let n of neighbors) {
+      for (const n of neighbors) {
         if (explored[n]) continue;
         explored[n] = true;
         const newNeighbors = getNeighbors(n, explored);
@@ -111,7 +111,7 @@ class FindSurfaces {
 
         explored[currentNode] = true;
 
-        for (let n of neighbors) {
+        for (const n of neighbors) {
           if (!explored[n]) {
             frontier.push(n);
           }

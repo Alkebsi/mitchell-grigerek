@@ -39,6 +39,7 @@ export default class City {
 
       this.city = gltf.scene;
       this.city.traverse((obj) => {
+        // eslint-disable-next-line no-param-reassign
         obj.material = this.cityMaterial;
       });
 
@@ -66,6 +67,17 @@ export default class City {
     this.lightAHelper = new THREE.DirectionalLightHelper(this.lightA);
     this.lightBHelper = new THREE.DirectionalLightHelper(this.lightB);
     this.scene.add(this.lightAHelper, this.lightBHelper, new THREE.AxesHelper());
+  }
+
+  enable(condition) {
+    if (!condition) {
+      if (this.tests.active) {
+        this.scene.add(this.lightAHelper, this.lightBHelper, new THREE.AxesHelper());
+      }
+      this.scene.add(this.lightA, this.lightB, this.city);
+    } else {
+      this.scene.remove(this.lightA, this.lightB, this.city);
+    }
   }
 
   setTests() {

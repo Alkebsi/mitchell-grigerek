@@ -9,6 +9,8 @@ export default class Room {
     this.resources = this.app.resources;
     this.tests = this.app.tests;
 
+    this.callOnce = true;
+
     this.debugObject = {
       LightAColor: '#b30a4f',
       LightBColor: '#15d8f2',
@@ -26,7 +28,7 @@ export default class Room {
     this.resources.gltfLoader.load('/models/room.glb', (gltf) => {
       this.room = gltf.scene;
       this.room.position.set(0, -0.65, 0);
-      this.scene.add(gltf.scene);
+      // this.scene.add(gltf.scene);
     });
   }
 
@@ -39,7 +41,7 @@ export default class Room {
     this.lightB.color.set(this.debugObject.LightBColor);
     this.lightB.position.set(0, 2, 2);
 
-    this.scene.add(this.lightA, this.lightB);
+    // this.scene.add(this.lightA, this.lightB);
   }
 
   setFloor() {
@@ -54,13 +56,24 @@ export default class Room {
 
     this.floor.position.set(0, -0.5, 0);
 
-    this.scene.add(this.floor);
+    // this.scene.add(this.floor);
   }
 
   setHelpers() {
     this.lightAHelper = new THREE.DirectionalLightHelper(this.lightA);
     this.lightBHelper = new THREE.DirectionalLightHelper(this.lightB);
-    this.scene.add(this.lightAHelper, this.lightBHelper, new THREE.AxesHelper());
+    // this.scene.add(this.lightAHelper, this.lightBHelper, new THREE.AxesHelper());
+  }
+
+  enable(condition) {
+    if (!condition) {
+      this.scene.remove(this.lightA, this.lightB, this.room, this.floor);
+    } else {
+      if (this.tests.active) {
+        this.scene.add(this.lightAHelper, this.lightBHelper, new THREE.AxesHelper());
+      }
+      this.scene.add(this.lightA, this.lightB, this.room, this.floor);
+    }
   }
 
   setTests() {

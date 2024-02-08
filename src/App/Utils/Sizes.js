@@ -21,14 +21,6 @@ export default class Sizes {
     this.setSizes();
   }
 
-  fullScreen() {
-    this.htmlDocument = document.querySelector('html');
-
-    if (!document.fullscreenElement) {
-      this.htmlDocument.requestFullscreen();
-    }
-  }
-
   setDoorsInfo() {
     this.doorsCount = 6;
     this.fakeDoors = 100;

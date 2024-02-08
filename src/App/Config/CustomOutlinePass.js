@@ -1,13 +1,10 @@
-import * as THREE from "three";
-import { Pass, FullScreenQuad } from "three/examples/jsm/postprocessing/Pass.js";
-import {
-  getSurfaceIdMaterial,
-  getDebugSurfaceIdMaterial,
-} from "./FindSurfaces.js";
+import * as THREE from 'three';
+import { Pass, FullScreenQuad } from 'three/examples/jsm/postprocessing/Pass';
+import { getSurfaceIdMaterial, getDebugSurfaceIdMaterial } from './FindSurfaces';
 
 // Follows the structure of
 // 		https://github.com/mrdoob/three.js/blob/master/examples/jsm/postprocessing/OutlinePass.js
-class CustomOutlinePass extends Pass {
+export default class CustomOutlinePass extends Pass {
   constructor(resolution, scene, camera) {
     super();
 
@@ -20,10 +17,7 @@ class CustomOutlinePass extends Pass {
 
     // Create a buffer to store the normals of the scene onto
     // or store the "surface IDs"
-    const surfaceBuffer = new THREE.WebGLRenderTarget(
-      this.resolution.x,
-      this.resolution.y
-    );
+    const surfaceBuffer = new THREE.WebGLRenderTarget(this.resolution.x, this.resolution.y);
     surfaceBuffer.texture.format = THREE.RGBAFormat;
     surfaceBuffer.texture.type = THREE.HalfFloatType;
     surfaceBuffer.texture.minFilter = THREE.NearestFilter;
@@ -54,7 +48,7 @@ class CustomOutlinePass extends Pass {
       this.resolution.x,
       this.resolution.y,
       1 / this.resolution.x,
-      1 / this.resolution.y
+      1 / this.resolution.y,
     );
   }
 
@@ -97,12 +91,9 @@ class CustomOutlinePass extends Pass {
     renderer.render(this.renderScene, this.renderCamera);
     this.renderScene.overrideMaterial = overrideMaterialValue;
 
-    this.fsQuad.material.uniforms["depthBuffer"].value =
-      readBuffer.depthTexture;
-    this.fsQuad.material.uniforms["surfaceBuffer"].value =
-      this.surfaceBuffer.texture;
-    this.fsQuad.material.uniforms["sceneColorBuffer"].value =
-      readBuffer.texture;
+    this.fsQuad.material.uniforms.depthBuffer.value = readBuffer.depthTexture;
+    this.fsQuad.material.uniforms.surfaceBuffer.value = this.surfaceBuffer.texture;
+    this.fsQuad.material.uniforms.sceneColorBuffer.value = readBuffer.texture;
 
     // 2. Draw the outlines using the depth texture and normal texture
     // and combine it with the scene color
@@ -130,6 +121,7 @@ class CustomOutlinePass extends Pass {
 			}
 			`;
   }
+
   get fragmentShader() {
     return `
 			#include <packing>
@@ -264,7 +256,7 @@ class CustomOutlinePass extends Pass {
         depthBuffer: {},
         surfaceBuffer: {},
         outlineColor: { value: new THREE.Color(0xffffff) },
-        //4 scalar values packed in one uniform: depth multiplier, depth bias, and same for normals.
+        // 4 scalar values packed in one uniform: depth multiplier, depth bias, and same for normals.
         multiplierParameters: {
           value: new THREE.Vector4(0.9, 20, 1, 1),
         },
@@ -275,7 +267,7 @@ class CustomOutlinePass extends Pass {
             this.resolution.x,
             this.resolution.y,
             1 / this.resolution.x,
-            1 / this.resolution.y
+            1 / this.resolution.y,
           ),
         },
       },
@@ -284,5 +276,3 @@ class CustomOutlinePass extends Pass {
     });
   }
 }
-
-export { CustomOutlinePass };

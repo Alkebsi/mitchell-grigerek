@@ -31,7 +31,7 @@ export default class Camera extends THREE.EventDispatcher {
         0.01,
         1000,
       );
-      //this.instance.position.setZ(300);
+      this.instance.position.set(5, 4, 300);
     } else {
       this.tests.camera = this.tests.world.addFolder('Camera');
 
@@ -57,6 +57,7 @@ export default class Camera extends THREE.EventDispatcher {
       };
 
       this.instance = this.camOptions.perspective;
+      this.instance.position.set(5, 4, 5);
 
       // Adding the tests to the GUI
       this.tests.camera
@@ -75,7 +76,6 @@ export default class Camera extends THREE.EventDispatcher {
         });
     }
 
-    this.instance.position.set(5, 4, 5);
     this.instanceGroup.add(this.instance);
     this.instanceGroup.position.set(0, 0, 0);
     this.scene.add(this.instanceGroup);
