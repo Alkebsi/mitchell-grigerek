@@ -11,9 +11,13 @@ import Resources from './Utils/Resources';
 // Three.js Configurations
 import Camera from './Config/Camera';
 import Renderer from './Config/Renderer';
+//import Postprocessing from './Config/Postprocessing'
 
 // Three.js Visual Assets
 import World from './World/World';
+
+// Mobile DevTools
+import DevTools from './Utils/DevTools'
 
 let instance = null; // this is the variable used inside the SiteManager class
 
@@ -34,6 +38,7 @@ export default class App {
 
     // Fetching Utils
     this.tests = new Tests();
+    this.devTools = new DevTools();
     this.sizes = new Sizes();
     this.interval = new Interval();
     this.resources = new Resources();
@@ -44,6 +49,7 @@ export default class App {
     // Fetching Three.js Elements
     this.camera = new Camera();
     this.renderer = new Renderer();
+    //this.postprocessing = new Postprocessing();
     this.world = new World();
 
     // Calling Methods
@@ -80,12 +86,14 @@ export default class App {
       this.interval.update();
       this.camera.update();
       this.world.update();
+      // this.postprocessing.update();
       this.renderer.update(); // Not in need if passes are being used.
       this.tests.stats.end();
     } else {
       this.interval.update();
       this.camera.update();
       this.world.update();
+      // this.postprocessing.update();
       this.renderer.update(); // Not in need if passes are being used.
     }
 

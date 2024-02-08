@@ -31,6 +31,7 @@ export default class Camera extends THREE.EventDispatcher {
         0.01,
         1000,
       );
+      //this.instance.position.setZ(300);
     } else {
       this.tests.camera = this.tests.world.addFolder('Camera');
 
