@@ -7,6 +7,7 @@ export default class City {
     this.scene = this.app.scene;
     this.sizes = this.app.sizes;
     this.tests = this.app.tests;
+    this.postprocessing = this.app.postprocessing;
     this.resources = this.app.resources;
 
     this.debugObject = {
@@ -45,6 +46,7 @@ export default class City {
 
       // this.room.position.set(0, -0.65, 0);
       this.scene.add(this.city);
+      this.postprocessing.addSurfaceIdAttributeToMesh(this.city);
     });
   }
 

@@ -11,7 +11,7 @@ import Resources from './Utils/Resources';
 // Three.js Configurations
 import Camera from './Config/Camera';
 import Renderer from './Config/Renderer';
-//import Postprocessing from './Config/Postprocessing'
+import Postprocessing from './Config/Postprocessing'
 
 // Three.js Visual Assets
 import World from './World/World';
@@ -49,7 +49,7 @@ export default class App {
     // Fetching Three.js Elements
     this.camera = new Camera();
     this.renderer = new Renderer();
-    //this.postprocessing = new Postprocessing();
+    this.postprocessing = new Postprocessing();
     this.world = new World();
 
     // Calling Methods
@@ -86,15 +86,15 @@ export default class App {
       this.interval.update();
       this.camera.update();
       this.world.update();
-      // this.postprocessing.update();
-      this.renderer.update(); // Not in need if passes are being used.
+      this.postprocessing.update();
+      //this.renderer.update(); // Not in need if passes are being used.
       this.tests.stats.end();
     } else {
       this.interval.update();
       this.camera.update();
       this.world.update();
-      // this.postprocessing.update();
-      this.renderer.update(); // Not in need if passes are being used.
+      this.postprocessing.update();
+      //this.renderer.update(); // Not in need if passes are being used.
     }
 
     requestAnimationFrame(() => {
