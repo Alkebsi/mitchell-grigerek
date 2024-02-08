@@ -19,7 +19,7 @@ import World from './World/World';
 let instance = null; // this is the variable used inside the SiteManager class
 
 export default class App {
-  constructor(canvas) {
+  constructor(canvas, loadingPanel) {
     // Checking if it was called once before
     if (instance) {
       // eslint-disable-next-line no-constructor-return
@@ -37,7 +37,7 @@ export default class App {
     this.tests = new Tests();
     this.sizes = new Sizes();
     this.interval = new Interval();
-    this.resources = new Resources();
+    this.resources = new Resources(loadingPanel);
 
     // Creating the Scene
     this.scene = new Scene();

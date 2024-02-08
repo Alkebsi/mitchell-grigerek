@@ -3,4 +3,5 @@ import './index.css';
 import App from './App/App';
 
 const canvas = document.getElementById('webgl');
-const app = new App(canvas);
+const loadingPanel = document.getElementById('loading-panel');
+const app = new App(canvas, loadingPanel);
