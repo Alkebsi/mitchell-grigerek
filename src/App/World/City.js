@@ -30,7 +30,7 @@ export default class City {
     this.gradientMap.minFilter = THREE.NearestFilter;
 
     // Load and import the models
-    this.resources.gltfLoader.load('/models/city-unwrapped.glb', (gltf) => {
+    this.resources.gltfLoader.load('./models/city-unwrapped.glb', (gltf) => {
       this.cityMaterial = new THREE.MeshToonMaterial({
         color: 0xffffff,
         gradientMap: this.gradientMap,

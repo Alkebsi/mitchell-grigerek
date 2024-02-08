@@ -25,7 +25,7 @@ export default class Room {
   }
 
   setRoom() {
-    this.resources.gltfLoader.load('/models/room.glb', (gltf) => {
+    this.resources.gltfLoader.load('./models/room.glb', (gltf) => {
       this.room = gltf.scene;
       this.room.position.set(0, -0.65, 0);
       // this.scene.add(gltf.scene);
